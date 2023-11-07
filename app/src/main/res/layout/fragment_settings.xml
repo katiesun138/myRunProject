@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- TODO: Update blank fragment layout -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_start_input">
+
+    <TextView
+        android:id="@+id/accPref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Account Preferences"
+        android:layout_marginTop="20dp"
+        android:textSize="25dp"/>
+
+    <ListView
+        android:id="@+id/accOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accPref"/>
+<!--    <CheckBox-->
+<!--        android:id="@+id/privacyCheckBox"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:text="Privacy Setting"-->
+<!--        android:textSize="18sp" />-->
+
+    <TextView
+        android:id="@+id/addSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Additional Settings"
+        android:layout_below="@+id/accOptions"
+        android:layout_marginTop="20dp"
+        android:textSize="25dp"/>
+
+    <ListView
+        android:id="@+id/addSettingsOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addSettings"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/misc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Misc"
+        android:layout_below="@+id/addSettingsOptions"
+        android:layout_marginTop="20dp"
+        android:textSize="25dp"/>
+
+    <ListView
+        android:id="@+id/miscListViewOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/misc"
+        android:layout_marginTop="8dp" />
+
+</RelativeLayout>
