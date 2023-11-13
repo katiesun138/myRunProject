@@ -36,6 +36,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.ViewModelProvider
 import java.io.File
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -50,15 +51,31 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sharedPref: SharedPreferences
     private var uriToLoad:Uri?=null
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable("uriToLoad", uriToLoad)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d("profile pic", uriToLoad.toString())
 
-        var uriToLoad: Uri
 
         sharedPref = getSharedPreferences("myPref", MODE_PRIVATE)
+//        uriToLoad?.let { loadImage(it) }
+        if (savedInstanceState != null) {
+            // Restore the URI from the saved instance state
+            uriToLoad = savedInstanceState.getParcelable("uriToLoad")
+            uriToLoad?.let { loadImage(it) }
+        }
+        else{
+            loadProfile()
 
-        loadProfile()
+        }
+
+        Log.d("profile pic2", uriToLoad.toString())
+
 
         val photoBtn = findViewById<Button>(R.id.photo)
         val saveBtn = findViewById<Button>(R.id.save)
@@ -145,10 +162,12 @@ class MainActivity : AppCompatActivity() {
         val selectedButtonId = sharedPref.getInt("genderIdStore", -1)
 
         if (selectedButtonId != -1) {
-            Log.d("gender", selectedButtonId.toString())
             val radioButton = findViewById<RadioButton>(selectedButtonId)
+            val radioButtonIDSelected = radioButton.id
 
-            radioButton.isChecked = true
+            val radioGroup = findViewById<RadioGroup>(R.id.radio)
+            radioGroup.check(radioButtonIDSelected)
+
         }
 
         val uriLoaded = sharedPref.getString("uriStore", null)
@@ -188,6 +207,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         editor.putInt("genderIdStore", selectedRadioId)
+        Log.d("selected Radio", genderBtnId)
         editor.putString("nameStore", name)
         editor.putString("emailStore", email)
         editor.putString("phoneStore", phone)
