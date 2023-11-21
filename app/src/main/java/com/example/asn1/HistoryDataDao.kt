@@ -17,10 +17,6 @@ interface HistoryDataDao {
 
     @Query("SELECT * FROM history_table")
     fun getAllHistoryDisplay(): Flow<List<HistoryData>>
-
-//    @Query("SELECT * FROM history_table WHERE id = :key")
-//    fun getEntry(key:Long): HistoryData
-
     @Query("DELETE FROM history_table")
     suspend fun deleteAll()
 

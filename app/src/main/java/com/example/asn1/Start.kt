@@ -77,38 +77,41 @@ class Start : Fragment() {
             val intent = Intent(requireContext(), StartInput::class.java)
 
             val inputType = spinnerInput.selectedItem.toString()
+
+            val inputTypeMap = mapOf(
+                "Manual Entry" to 0,
+                "GPS" to 1,
+                "Automatic" to 2
+            )
+
+            val activityTypeMap = mapOf(
+                "Running" to 0,
+                "Walking" to 1,
+                "Standing" to 2,
+                "Cycling" to 3,
+                "Hiking" to 4,
+                "Downhill Skiing" to 5,
+                "Cross-Country Skiing" to 6,
+                "Snowboarding" to 7,
+                "Skating" to 8,
+                "Swimming" to 9,
+                "Mountain Biking" to 10,
+                "Wheelchair" to 11,
+                "Elliptical" to 12,
+                "Other" to 13
+            )
+
+            val selectedItemInputType = spinnerInput.selectedItem.toString()
+            val numericInputType = inputTypeMap[selectedItemInputType]
+            val selectedActivity = spinnerActivity.selectedItem.toString()
+            val numericActivity = activityTypeMap[selectedActivity]
+
             if (inputType != "Manual Entry") {
+                intentMap.putExtra("inputType", selectedItemInputType);
+                intentMap.putExtra("activityType", selectedActivity);
                 startActivity(intentMap)
             }
             else {
-
-                val inputTypeMap = mapOf(
-                    "Manual Entry" to 0,
-                    "GPS" to 1,
-                    "Automatic" to 2
-                )
-
-                val activityTypeMap = mapOf(
-                    "Running" to 0,
-                    "Walking" to 1,
-                    "Standing" to 2,
-                    "Cycling" to 3,
-                    "Hiking" to 4,
-                    "Downhill Skiing" to 5,
-                    "Cross-Country Skiing" to 6,
-                    "Snowboarding" to 7,
-                    "Skating" to 8,
-                    "Swimming" to 9,
-                    "Mountain Biking" to 10,
-                    "Wheelchair" to 11,
-                    "Elliptical" to 12,
-                    "Other" to 13
-                )
-
-                val selectedItemInputType = spinnerInput.selectedItem.toString()
-                val numericInputType = inputTypeMap[selectedItemInputType]
-                val selectedActivity = spinnerActivity.selectedItem.toString()
-                val numericActivity = activityTypeMap[selectedActivity]
                 intent.putExtra("inputType", numericInputType);
                 intent.putExtra("activityType", numericActivity);
                 startActivity(intent)
